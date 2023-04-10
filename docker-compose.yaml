@@ -111,7 +111,15 @@ services:
       retries: 50
       start_period: 30s
     restart: always
-
+  python:
+    build:
+      context: ./dockerfiles
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis  
   airflow-webserver:
     <<: *airflow-common
     command: webserver
@@ -293,6 +301,5 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-
 volumes:
   postgres-db-volume:
