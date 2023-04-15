@@ -47,10 +47,9 @@ def insert_to_tables(cur, conn):
         try:
             cur.copy_from(taking_data_from_s3, 'staging_surf_report', sep=",") #using copy_from to insert data to staging_surf_report
             print("Data inserted using copy_from_datafile() successfully....")  
-        except (Exception, psycopg2.DatabaseError) as err:
+        except (Exception, psycopg2.DatabaseError):
             print(psycopg2.DatabaseError)
             print(Exception)
-            show_psycopg2_exception(err)
             cur.close()
         conn.commit()
 
