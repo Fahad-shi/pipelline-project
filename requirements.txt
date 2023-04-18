@@ -6,3 +6,5 @@ pysurfline
 configparser==5.0.2
 psycopg2-binary
 pendulum==2.1.2
+plotly==5.3.1
+dash==2.0.0
