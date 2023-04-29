@@ -1,15 +1,16 @@
 from datetime import datetime,timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.bash_operator import BashOperator
+from airflow.operators.dummy import DummyOperator
 import pandas as pd
 import pendulum
 import os
-from airflow.operators.dummy import DummyOperator
 from create_tables import main_create
 from insert_to_tables import main_insert
 from data_to_s3 import download_data_from_source
 from data_to_s3 import load_s3_data
-from data_to_s3 import download_s3_data
+
 
 default_args = {
     'owner': 'fahad',
@@ -55,11 +56,7 @@ def final_project():
     dag=dag
     )
 
-    download_data_from_s3_task = PythonOperator(
-    task_id='download_from_s3',
-    python_callable=download_s3_data,
-    dag=dag
-    )
+   
 
     insert_data_to_tables_task = PythonOperator(
     task_id='insert_data_to_tables',
@@ -73,9 +70,8 @@ def final_project():
     >> create_tables_data_task \
     >> download_data_from_source_task \
     >> load_data_to_s3_task \
-    >> download_data_from_s3_task \
     >> insert_data_to_tables_task \
     >> end_operator
-
+    
 final_project_dag = final_project()
 
