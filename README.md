@@ -32,8 +32,8 @@ To get started with this project, you need to clone the repository to your local
 Installation: 
 To install this project, you will need to follow the following steps:
 1. Clone the repository to your local machine
-2. Install the necessary dependencies and packages by running `docker-compose build` the `docker-compose up`
-3. Set up the environment variables to connect to the AWS RDS instance and S3 bucket 
+2. Install the necessary dependencies and packages by running `docker-compose build` after that `docker-compose up`
+3. Set up the environment variables to connect to the AWS RDS instance and S3 bucket or you set them up in Apache Airflow -> admin -> connections
 
 Usage: 
 To use this project, you will need to:
